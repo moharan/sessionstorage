@@ -1,13 +1,23 @@
-//alert("existe");
-function guardarDatos() {
-	localStorage.nombre = document.getElementById("nombre").value;
-	localStorage.password = document.getElementById("password").value;	
+function saveData(){
+	var name = document.getElementById("name").value;
+	var clave = document.getElementById("clave").value;
+	sessionStorage.setItem(name,clave);
 }
-function recuperarDatos(){
-	if((localStorage.nombre != undefined) && (localStorage.password != undefined)) {
-		document.getElementById("datos").innerHTML = "Nombre: " + localStorage.nombre + "<br/> Password: " + localStorage.password;
-	}	
-	else {
-		document.getElementById("datos").innerHTML = "No has introducido tu nombre y tu password";
+
+function recoverData(){
+	for(var i = 0; i < sessionStorage.length; i++){
+		var name = sessionStorage.key(i);
+		var clave = sessionStorage.getItem(name);
+		document.getElementById("data").innerHTML = "<div>" + "Nombre: " 
+		+ name + "</br> Clave: " + clave + "</div>";
 	}
+}
+
+function cleanData(){
+	document.getElementById("data").innerHTML = "Limpiada vista. Los datos permanecen";
+}
+
+function borrarTodo(){
+	sessionStorage.clear();
+	recoverData();
 }
